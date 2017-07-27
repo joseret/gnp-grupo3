@@ -25,13 +25,14 @@ from processing_service import ProcessingService
 
 
 REST_COMMAND_TYPE = 'policy'
+
 class RestHandler(webapp2.RequestHandler):
   def get(self):
     try:
       parsedUrl = urlparse(self.request.url)
-      ps = ProcessingService('V1.0.0')
+      ps = ProcessingService('V1-2-0')
       if parsedUrl.path == '/rest/' + REST_COMMAND_TYPE:
-        result =  ps.get_policies("V1.0.0")
+        result =  ps.get_policies("V1-2-0")
         if (type(result) == dict and
               'success' in result):
 
@@ -55,7 +56,7 @@ class RestHandler(webapp2.RequestHandler):
       parsedUrl = urlparse(self.request.url)
 
       json_data = json.loads(self.request.body)
-      ps = ProcessingService('V1.0.0')
+      ps = ProcessingService('V1-2-0')
       if parsedUrl.path == '/rest/' + REST_COMMAND_TYPE:
         result =  ps.update_policy("jose", json_data)
         if (type(result) == dict and
@@ -78,7 +79,12 @@ class RestHandler(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        self.response.write(u"<body style=\'background-color: green\'>Órale, México - Simple App - Stubs) - GNP!</body>")
+        print "V:", os.environ("CURRENT_VERSION_ID")
+        for key, value in os.environ.iteritems():
+            print 'env', "{} = {}\n".format(key, value)
+        self.response.write(u"<body style=\'background-color: orange\'>Órale, México - Simple App  - DB) - GNP!"
+          + u"v[" + unicode(os.environ["CURRENT_VERSION_ID"]) + "]"
+          + u" </body>")
 
 
 app = webapp2.WSGIApplication([
