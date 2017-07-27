@@ -59,7 +59,7 @@ FriendlyChat.prototype.getInfo = function() {
           innerInfo.append( $('<span style="padding-right: 10px" />').text('Entrado'));
           innerInfo.append( $('<span style="padding-right: 10px" />').text(json_data['list'][o]['last_entered']));
           $("#messages").append(innerInfo);
-          $("#messages").append($('<img src = "/home/developer/pictures/download.png" alt = "test" width = "300" height ="400"/>'));
+          $("#messages").append($('<img src = "/images/download.png" alt = "test" width = "300" height ="400"/>'));
         }
       } else {
         $("#messages").empty();
